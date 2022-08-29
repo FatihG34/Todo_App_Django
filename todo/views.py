@@ -28,6 +28,11 @@ def todo_create(request):
 def todo_update(request, id):
     todo = Todo.objects.get(id=id)
     form = TodoForm(instance=todo)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
     context={
         'todo':todo,
         'form':form
