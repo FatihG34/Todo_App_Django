@@ -23,3 +23,13 @@ def todo_create(request):
         'form': form
     }
     return render(request, 'todo/todo_add.html', context)
+
+
+def todo_update(request, id):
+    todo = Todo.objects.get(id=id)
+    form = TodoForm(instance=todo)
+    context={
+        'todo':todo,
+        'form':form
+    }
+    return render(request, 'todo/todo_update.html', context)
