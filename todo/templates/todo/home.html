@@ -1,30 +1,30 @@
 {% extends 'todo/base.html' %}
 <br />
 {% block content %}
-<div class="contianer d-flex">
-  <form action="/add/" method="POST">
+<div class="contianer d-flex justify-content-evenly align-items-center">
+  <form action="/add/" method="POST" class="row g-3 w-75 p-2 m-3">
     {% csrf_token %} {{form.as_p}}
-    <input type="submit" value="Add" />
+    <input type="submit" value="Add" class="btn btn-primary w-50" />
   </form>
-  <table>
+  <table class="table mx-4">
     <thead>
       <tr>
-        <th>No</th>
-        <th>Title</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th scope="col">No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
       {% for todo in todos %}
       <tr>
-        <td>{{forloop.counter}}</td>
+        <td scope="row">{{forloop.counter}}</td>
         <td>{{todo.title}}</td>
         <td>
-          <button><a href="{% url 'update' todo.id %}">Update </a></button>
+          <button class="btn btn-primary"><a href="{% url 'update' todo.id %}" class="text-white text-decoration-none">Update </a></button>
         </td>
         <td>
-          <button><a href="{% url 'delete' todo.id %}">Delete</a></button>
+          <button class="btn btn-primary"><a href="{% url 'delete' todo.id %}"  class="text-white text-decoration-none">Delete</a></button>
         </td>
       </tr>
       {% endfor %}
