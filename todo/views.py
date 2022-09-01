@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from todo.forms import TodoForm
 from todo.models import Todo
 from django.contrib import messages
+from django.shortcuts import render,redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -54,3 +59,27 @@ def todo_delete(request, id):
         'todo':todo
     }
     return render(request, 'todo/todo_delete.html', context)
+
+
+
+@login_required
+def special(request):
+    return render(request, "user_example/special.html")
+
+def register(request):
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data['username']  # same == # form.cleaned_data.get('username') 
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('login')
+    context = {
+        'form': form
+    }
+    return render(request, 'registration/register.html', context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
