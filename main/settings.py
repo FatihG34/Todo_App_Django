@@ -124,6 +124,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_URL ="media/"
+import os
+MEDIA_ROOT=os.path.join(BASE_DIR, "media")
 
 
 # Default primary key field type
