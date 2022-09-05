@@ -1,35 +1,99 @@
-{% extends 'todo/base.html' %}
+{% extends 'todo/base.html' %} 
+
 
 {% block content %}
-<div class="container d-flex align-items-center g-3">
-  <form action="/add/" method="POST" class="row g-2">
-    {% csrf_token %} {{crispy}} 
-    {{form}} 
-    <input type="submit" value="Add" class="btn btn-primary w-25" />
-  </form>
-  <table class="table mx-5">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Title</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for todo in todos %}
-      <tr>
-        <td scope="row">{{forloop.counter}}</td>
-        <td>{{todo.title}}</td>
-        <td>
-          <button class="btn btn-primary"><a href="{% url 'update' todo.id %}" class="text-white text-decoration-none">Update </a></button>
-        </td>
-        <td>
-          <button class="btn btn-primary"><a href="{% url 'delete' todo.id %}"  class="text-white text-decoration-none">Delete</a></button>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+
+<div>
+    <div class="container pt-4">
+        <div class="row mt-2 p-0">
+            <div class="col-lg-4 mx-auto p-0 shadow">
+                <div class="alert alert-warning text-center">
+                    <h2>Add ToDo</h2>
+                </div>
+                <div class="p-4">
+                    <form action="/add/" method="POST">
+                        {% csrf_token%} {{form.as_p}}
+                        <hr>
+                        <input type="submit" value="ADD" class="btn btn-success">
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="border">
+                    {% if todos|length == 0 %}
+                    <div class="p-4">
+                        <br>
+                        <br>
+                        <div class="alert alert-danger text-center">
+                            <p class="" style="font-size: 30px;">ToDo Lists</p>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                    {%else%}
+                    <div class="p-2">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Delete</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for todo in todos%}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{todo.title}}</td>
+                                    {% if todo.status == 'C'%}
+                                    <td>
+                                        ✅
+                                    </td>
+                                    {% elif todo.status == 'I'%}
+                                    <td>
+                                        🚧
+                                    </td>
+                                    {% elif todo.status == 'P'%}
+                                    <td>
+                                        💤
+                                    </td>
+                                    {%endif%}
+
+                                    <td>
+                                        {% if todo.priority == '1'%}
+                                            1️⃣
+                                        {%elif todo.priority == '2'%}
+                                            2️⃣
+                                        {%elif todo.priority == '3'%}
+                                            3️⃣
+                                        {%elif todo.priority == '4'%}
+                                            4️⃣
+                                        {%elif todo.priority == '5'%}
+                                            5️⃣
+                                        {%endif%}
+                                    </td>
+
+                                    <td>
+                                        <a href="delete/{{todo.id}}" title="Delete" class="">🗑️</a> 
+                                    </td>
+                                    <td>
+                                            <a href="/update/{{todo.id}}"  class="">⚙️</a> 
+
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 {% endblock content %}
