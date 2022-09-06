@@ -4,12 +4,12 @@
 
 <form action="" method="POST">
 
+    {% csrf_token %}
     
     {% if form.errors %}
-    <p>There is something wrong what you entered!</p>
+        <p>There is something wrong what you entered!</p>
     {% endif %}
-    
-    {% csrf_token %}
+
     {{ form_user.as_p }}
     {{form_profile.as_p}}
     {# as_p orders the scene #}
