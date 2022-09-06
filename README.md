@@ -5,13 +5,13 @@
 
 <div align="center">
   <h3>
-    <a href="https://fg-todo-app.herokuapp.com/">
-      Live
+    <a href="https://{your-demo-link.your-domain}">
+      Demo
     </a>
-     <!-- | 
+     | 
     <a href="https://{your-url-to-the-solution}">
       Project
-    </a> -->
+    </a>
  
   </h3>
 </div>
