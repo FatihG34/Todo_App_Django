@@ -1,20 +1,22 @@
 {% extends "todo/base.html" %}
 {% block content %}
-<h1>Registration page</h1>
-
-<form action="" method="POST">
-
-    {% csrf_token %}
+<div class="container my-2">
+    <h1>Registration page</h1>
     
-    {% if form.errors %}
+    <form action="" method="POST" class="form-control bg-info bg-opacity-25">
+        
+        {% csrf_token %}
+        
+        {% if form.errors %}
         <p>There is something wrong what you entered!</p>
-    {% endif %}
-
-    {{ form_user.as_p }}
-    {{form_profile.as_p}}
-    {# as_p orders the scene #}
-
-    <input type="submit" value="Register">
-
-</form>
+        {% endif %}
+        
+        {{ form_user.as_p }}
+        {{form_profile.as_p}}
+        {# as_p orders the scene #}
+        
+        <input type="submit" value="Register" class="btn btn-info">
+        
+    </form>
+</div>
 {% endblock %}

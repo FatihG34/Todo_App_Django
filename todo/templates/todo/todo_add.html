@@ -1,5 +1,5 @@
 {% extends 'todo/base.html' %} {% block content %}
-<form action="" method="POST">
+<form action="" method="POST" class='mt-3'>
   {% csrf_token %} {{form.as_p}}
   <input type="submit" value="Add" />
 </form>
