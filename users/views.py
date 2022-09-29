@@ -37,13 +37,11 @@ def register(request):
         form_profile = UserProfileForm(request.POST, request.FILES)  # dosyaları almak için
 
         if form_user.is_valid() and form_profile.is_valid():
-            user = form_user().save()
-            profile = form_profile().save(commit=False)
+            user = form_user.save()
+            profile = form_profile.save(commit=False)
             profile.user = user
             profile.save()
-
             login(request, user)
-
             return redirect('home')
     context = {
         'form_user':form_user,

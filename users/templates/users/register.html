@@ -1,9 +1,10 @@
 {% extends "todo/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container my-2">
     <h1>Registration page</h1>
     
-    <form action="" method="POST" class="form-control bg-info bg-opacity-25">
+    <form method="POST" class="form-control bg-info bg-opacity-25">
         
         {% csrf_token %}
         
@@ -11,8 +12,8 @@
         <p>There is something wrong what you entered!</p>
         {% endif %}
         
-        {{ form_user.as_p }}
-        {{form_profile.as_p}}
+        {{ form_user|crispy }}
+        {{form_profile|crispy}}
         {# as_p orders the scene #}
         
         <input type="submit" value="Register" class="btn btn-info">
